@@ -1,0 +1,66 @@
+﻿{
+    "userName": "이승훈",
+    "energy": 0,
+    "ePc": 1,
+    "humans": 0,
+    "soldierList": [
+        {
+            "abilityNumber": 0,
+            "abilityName": "목소리",
+            "amount": 0,
+            "mPs": 1,
+            "price": 15
+        },
+        {
+            "abilityNumber": 1,
+            "abilityName": "유머",
+            "amount": 0,
+            "mPs": 5,
+            "price": 50
+        },
+        {
+            "abilityNumber": 2,
+            "abilityName": "도네이션",
+            "amount": 0,
+            "mPs": 20,
+            "price": 200
+        },
+        {
+            "abilityNumber": 3,
+            "abilityName": "실력",
+            "amount": 0,
+            "mPs": 100,
+            "price": 500
+        }
+    ],
+    "equipmentList": [
+        {
+            "equipmentNumber": 0,
+            "equipmentName": "마우스",
+            "price": 10000,
+            "oCm": 3,
+            "buy": false
+        },
+        {
+            "equipmentNumber": 1,
+            "equipmentName": "중간컴퓨터",
+            "price": 200000,
+            "oCm": 17,
+            "buy": false
+        },
+        {
+            "equipmentNumber": 2,
+            "equipmentName": "비싼컴퓨터",
+            "price": 3000000,
+            "oCm": 50,
+            "buy": false
+        },
+        {
+            "equipmentNumber": 3,
+            "equipmentName": "왕비싼컴퓨터",
+            "price": 100000000,
+            "oCm": 100,
+            "buy": false
+        }
+    ]
+}
