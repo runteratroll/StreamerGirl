@@ -16,4 +16,5 @@ public class User
     // 병사 갯수? 업그레이드?
     public List<Ability> soldierList = new List<Ability>();
     public List<Equipment> equipmentList = new List<Equipment>();
+    public List<Email> emailList = new List<Email>();
 }

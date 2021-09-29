@@ -85,7 +85,7 @@ public class TwichUser : MonoBehaviour
         {
             bCommon = RandomChance.GetThisChanceResult(50);
             if (!bCommon)
-                return;
+                randomChatingNumber = Random.Range(0, 4);
             int randomCommonChating = Random.Range(0, Chatingv.Count); //일반채팅
             chatingContent.text = (Chatingv[randomCommonChating]);
             Chatingv.RemoveAt(randomCommonChating);
@@ -97,7 +97,7 @@ public class TwichUser : MonoBehaviour
         {
             bool bVoice = RandomChance.GetThisChanceResult(GameManager.Instance.CurrentUser.Voicepercentage);
             if (!bVoice)
-                return;
+                randomChatingNumber = Random.Range(0, 4);
             int randomVoiceChating = Random.Range(0, voice.Count); //목소리채팅
             chatingContent.text = (voice[randomVoiceChating]);
 
@@ -108,7 +108,7 @@ public class TwichUser : MonoBehaviour
         {
             bool bHumor = RandomChance.GetThisChanceResult(GameManager.Instance.CurrentUser.Humorpercentage);
             if (!bHumor)
-                return;
+                randomChatingNumber = Random.Range(0, 4);
             int randomHumorChating = Random.Range(0, humor.Count); //유머채팅
             chatingContent.text = (humor[randomHumorChating]);
 
@@ -122,7 +122,7 @@ public class TwichUser : MonoBehaviour
 
             bool bGame = RandomChance.GetThisChanceResult(GameManager.Instance.CurrentUser.Gamepercentage);
             if (!bGame)
-                return;
+                randomChatingNumber = Random.Range(0, 4);
             int randomGameChating = Random.Range(0, Game.Count); //게임채팅
             chatingContent.text = (Game[randomGameChating]);
             Game.RemoveAt(randomGameChating);

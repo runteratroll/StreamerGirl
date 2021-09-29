@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject upgradeEquipmentPanelTemplate = null;
     [SerializeField]
+    private GameObject EmailTemplate = null;
+    [SerializeField]
     private TwichUser chatingPanelTemplate = null;
     [SerializeField]
     private MoneyText moneyTextMesh = null;
@@ -33,17 +35,23 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TwichUser twichUser = null;
     [SerializeField]
+    private Mail mail = null;
+    [SerializeField]
     private GameObject option = null;
     [SerializeField]
     private GameObject StatusMemo = null;
-
+    [SerializeField]
+    TextMeshProUGUI SuccessText = null;
     [SerializeField]
     private TextMeshProUGUI Money = null;
     [SerializeField]
     private TextMeshProUGUI Humans = null;
     [SerializeField]
     private Image image = null;
-
+    [SerializeField]
+    private GameObject GmailContent = null;
+    [SerializeField]
+    private TextMeshProUGUI CsuccessText = null;
     float spawnsTime;
     public float defaultTime = 0.05f;
     private Ability ability;
@@ -53,8 +61,19 @@ public class UIManager : MonoBehaviour
     Panels panels = Panels.SkillShop;
     private List<UpgradePanel> upgradePanels = new List<UpgradePanel>();
     private List<UpgradeEquipment> upgradeEquipment = new List<UpgradeEquipment>();
+    private List<Mail> upgradeMail = new List<Mail>();
+    GameObject newPanel = null;
+    Mail newMail = null;
+    public MailContent mailContent;
+
+    [SerializeField]
+    Button button = null;
     private void Start()
     {
+        
+        
+        
+        
         animator = FindObjectOfType<Animator>();
   
         CreatePanels();
@@ -62,12 +81,49 @@ public class UIManager : MonoBehaviour
         StartCoroutine(chatingInstance());
         StartCoroutine(donationInstance());
         UpdateEnergyPanel();
+      
     }
 
+    public bool EmailPurchase()
+    {
+        return true;
+    }
+    public bool EmailClick()
+    {
+        return true;
+    }
  
     private void Update()
     {
-        if (Input.GetMouseButton(0) && spawnsTime >= defaultTime)
+
+        foreach (Email email in GameManager.Instance.CurrentUser.emailList)
+        {
+            CreateEmail(email);
+            if (email.NickName == "트키치 운영자" && EmailClick())
+            {
+                ClickButonContent(email);
+
+
+            }
+            if (email.NickName == "팝캣" && EmailClick())
+            {
+                ClickButonContent(email);
+
+
+            }
+            if (email.NickName == "경기게임회사" && EmailClick())
+            {
+                ClickButonContent(email);
+
+
+            }
+
+            if (EmailPurchase())
+            {
+                OnClickPurchase(email);
+            }
+        }
+            if (Input.GetMouseButton(0) && spawnsTime >= defaultTime)
         {
 
             spawnsTime = 0;
@@ -107,6 +163,69 @@ public class UIManager : MonoBehaviour
             upgradeEquipment.Add(newPanelComponent);
         }
     }
+
+    private void CreateEmail(Email email)
+    {
+        //GameObject newPanel = null;
+        //Mail newMail = null;
+        
+        //foreach (Email email in GameManager.Instance.CurrentUser.emailList)
+        //{
+            
+            
+            newPanel = Instantiate(EmailTemplate, EmailTemplate.transform.parent);
+            newMail = newPanel.GetComponent<Mail>();
+            newMail.SetValue(email);
+            
+            newPanel.SetActive(true);  //생성되고 비활성화
+            
+
+
+
+            upgradeMail.Add(newMail);
+
+            
+
+
+
+
+        //}
+    }
+    public void OnClickPurchase(Email email)
+    {
+        
+        if (email.NickName == "경기게임회사 ")
+        {
+            CsuccessText.transform.position = new Vector2(0, 570);
+            GameManager.Instance.CurrentUser.energy += 30000;
+        }
+        if (email.NickName == "팝캣")
+        {
+            CsuccessText.transform.position = new Vector2(0, 570);
+            GameManager.Instance.CurrentUser.humans += 1000;
+        }
+        if (email.NickName == "트키치운영자")
+        {
+            CsuccessText.transform.position = new Vector2(0, 570);
+            GameManager.Instance.CurrentUser.Gamepercentage += 15;
+        }
+    }
+
+    public void ClickButonContent(Email email) 
+    {
+        
+        GmailContent.transform.position = Vector2.zero;
+
+
+        if (email.NickName == "팝캣")
+            mailContent.UpdateUI(email);
+        if (email.NickName == "경기게임회사")
+            mailContent.UpdateUI(email);
+        if (email.NickName == "트키치 운영자")
+            mailContent.UpdateUI(email);
+
+    }
+
     private IEnumerator chatingInstance()
     {
         
@@ -243,7 +362,9 @@ public class UIManager : MonoBehaviour
         StatusMemo.transform.position = Vector2.zero;
         
     }
-    
+
+
+
     public void exitStatus()
     {
         StatusMemo.transform.position = Vector2.down * 1000;

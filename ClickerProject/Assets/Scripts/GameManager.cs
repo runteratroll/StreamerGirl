@@ -29,13 +29,14 @@ public class GameManager : MonoSingleton<GameManager>
     {
         
         SAVE_PATH = Application.persistentDataPath + "/Save";
+        LoadFromJson();
         if (Directory.Exists(SAVE_PATH) == false)
         {
             Directory.CreateDirectory(SAVE_PATH);
         }
-        InvokeRepeating("SaveToJson", 0f, 60f);
+        InvokeRepeating("SaveToJson", 1f, 60f);
         InvokeRepeating("EarnEnergyPerSecond", 0f, 1f);
-        LoadFromJson();
+        
         uiManager = GetComponent<UIManager>();
     }
 
