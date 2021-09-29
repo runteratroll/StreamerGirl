@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource buttonSource;
 
+    public AudioSource clickSource;
     private void Awake()
     {
         
@@ -28,8 +29,17 @@ public class SoundManager : MonoBehaviour
 
     }
 
+    public void SetClickVolume(float volume)
+    {
+        clickSource.volume = volume;
+    }
     public void OnSfx()
     {
         buttonSource.Play();
+    }
+
+    public void OnCfx()
+    {
+        clickSource.Play();
     }
 }

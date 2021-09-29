@@ -7,4 +7,5 @@ public class Equipment
     public int price;
     public int oCm; //OnClickMony;
     public bool buy= false;
+    public string equipmentExplain;
 }

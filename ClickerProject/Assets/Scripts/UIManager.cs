@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    private Text moneyText = null; //에너지
+    private TextMeshProUGUI moneyTextMeshProUGUI = null; //에너지
     [SerializeField]
-    private Text humansText = null;
+    private TextMeshProUGUI humansTextMeshProUGUI = null;
     [SerializeField]
     private GameObject upgradePanelTemplate = null;
     [SerializeField]
@@ -16,31 +17,63 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TwichUser chatingPanelTemplate = null;
     [SerializeField]
-    private MoneyText moneyTextTemplate = null;
+    private MoneyText moneyTextMesh = null;
+    [SerializeField]
+    private windowsClcik windowsClcik = null;
+    [SerializeField]
+    private Donation donation = null;
     [SerializeField]
     private Transform pool = null;
     [SerializeField]
     private Transform poolChating;
     [SerializeField]
+    private Transform poolDonation;
+    [SerializeField]
+    private Transform poolClick;
+    [SerializeField]
     private TwichUser twichUser = null;
     [SerializeField]
     private GameObject option = null;
+    [SerializeField]
+    private GameObject StatusMemo = null;
 
+    [SerializeField]
+    private TextMeshProUGUI Money = null;
+    [SerializeField]
+    private TextMeshProUGUI Humans = null;
+    [SerializeField]
+    private Image image = null;
+
+    float spawnsTime;
+    public float defaultTime = 0.05f;
     private Ability ability;
     enum Panels {SkillShop, EquipMent};
 
+    Animator animator = null;
     Panels panels = Panels.SkillShop;
     private List<UpgradePanel> upgradePanels = new List<UpgradePanel>();
     private List<UpgradeEquipment> upgradeEquipment = new List<UpgradeEquipment>();
     private void Start()
     {
-        
-        UpdateEnergyPanel();
+        animator = FindObjectOfType<Animator>();
+  
         CreatePanels();
         CreateEqupimentPanels();
         StartCoroutine(chatingInstance());
+        StartCoroutine(donationInstance());
+        UpdateEnergyPanel();
     }
 
+ 
+    private void Update()
+    {
+        if (Input.GetMouseButton(0) && spawnsTime >= defaultTime)
+        {
+
+            spawnsTime = 0;
+        }
+        spawnsTime += Time.deltaTime;
+    }
     private void CreatePanels()
     {
         if (panels == Panels.SkillShop)
@@ -76,79 +109,123 @@ public class UIManager : MonoBehaviour
     }
     private IEnumerator chatingInstance()
     {
+        
         GameObject newChating;
         while (true)
-        { 
-
+        {
+     
             if(poolChating.childCount > 0)
             {
                twichUser = poolChating.GetChild(0).GetComponent<TwichUser>();
                 twichUser.RandomColor();
-                twichUser.UpdateChating();
+                twichUser.UpdateShow();
                 twichUser.Show();
             }
             else
             {
                 twichUser = Instantiate(chatingPanelTemplate, chatingPanelTemplate.transform.parent);
                 twichUser.RandomColor();
-                twichUser.UpdateChating();
+                twichUser.UpdateShow();
                 twichUser.Show();
             }
+        
+            yield return new WaitForSeconds(1.5f); //반복이 안되는 문제고치기기ㅣ기긱
 
-            yield return new WaitForSeconds(1f); //반복이 안되는 문제고치기기ㅣ기긱
             Debug.Log("실행됨?");
         }
     }
 
+    private IEnumerator donationInstance()
+    {
+
+        Donation newDonation = null;
+        while (true)
+        {
+            yield return new WaitForSeconds(GameManager.Instance.CurrentUser.donationSpeed); // 30
+            bool Random = RandomChance.GetThisChanceResult(70); //70%확률
+            if(!Random)
+            {
+                yield return new WaitForSeconds(GameManager.Instance.CurrentUser.donationSpeed); //30
+            }
+            if (poolDonation.childCount > 0)
+            {
+                newDonation = poolDonation.GetChild(0).GetComponent<Donation>();
+                
+
+            }
+            else
+            {
+                newDonation = Instantiate(donation, donation.transform.parent);
+                
+            }
+
+            newDonation.UpdateDonation();
+            newDonation.Show();
+
+            yield return new WaitForSeconds(3f);
+            newDonation.Exit();
+                
+        }
+    }
+
+    
     public void OnClickBeaker()
     {
 
         GameManager.Instance.CurrentUser.energy += GameManager.Instance.CurrentUser.ePc;
         UpdateEnergyPanel();
-        
-        MoneyText newText = null; //생성된 오브젝트는 복사기 때문에
-
-        if (pool.childCount > 0) //풀에 자식이 있다면 즉  //가죠오기
+        animator.SetTrigger("ButtonClick");
+        MoneyText newTextMeshProUGUI = null; //생성된 오브젝트는 복사기 때문에
+        windowsClcik NewWindowsClcik = null;
+        if (poolClick.childCount > 0) //풀에 자식이 있다면 즉  //가죠오기
         {
-            newText = pool.GetChild(0).GetComponent<MoneyText>(); //접근
+            NewWindowsClcik = poolClick.GetChild(0).GetComponent<windowsClcik>(); //접근
             //getchild는 트랜스폼만 가져오기에 스크립트도 컴포넌트로 가져간다.
         }
         else //복사하기
         {
-            newText = Instantiate(moneyTextTemplate, moneyTextTemplate.transform.parent);
+            NewWindowsClcik = Instantiate(windowsClcik, windowsClcik.transform.parent);
+        }
+
+        if (pool.childCount > 0) //풀에 자식이 있다면 즉  //가죠오기
+        {
+            newTextMeshProUGUI = pool.GetChild(0).GetComponent<MoneyText>(); //접근
+            //getchild는 트랜스폼만 가져오기에 스크립트도 컴포넌트로 가져간다.
+        }
+        else //복사하기
+        {
+            newTextMeshProUGUI = Instantiate(moneyTextMesh, moneyTextMesh.transform.parent);
         }
         foreach(Ability ability in GameManager.Instance.CurrentUser.soldierList)
         {
             GameManager.Instance.CurrentUser.humans += ability.amount ;
         }
         
-        newText.Show(Input.mousePosition);
-
+        newTextMeshProUGUI.Show(Input.mousePosition);
+        NewWindowsClcik.Show(Input.mousePosition);
 
     }
+
+    
     public void UpdateEnergyPanel()
     {
-        switch(GameManager.Instance.CurrentUser.energy/ 1000)
-        {
-            case 10:
-                Debug.Log("ddddddddddd");
-                moneyText.text = string.Format("{0} 만 {1} 천원", GameManager.Instance.CurrentUser.energy/ 10000, GameManager.Instance.CurrentUser.energy/10); //1만 2천
-                break;
-            case 100000:
-                moneyText.text = string.Format("{0} 억 {1} 만원", GameManager.Instance.CurrentUser.energy / 100000000, GameManager.Instance.CurrentUser.energy / 1000); // 1억 2032원
-                break;
-            default:
-                moneyText.text = string.Format("{0} 원", GameManager.Instance.CurrentUser.energy);
-                break;
-        }
-            
-      
+
+
+
+        moneyTextMeshProUGUI.text = string.Format("{0} 원", GameManager.Instance.CurrentUser.energy);
+        Money.text = string.Format("보유머니: \n" + "{0}", GameManager.Instance.CurrentUser.energy);
+
     }
+            
+    
     public void UpdateHumansPanel()
     {
 
-        humansText.text = string.Format("{0}", GameManager.Instance.CurrentUser.humans);
         
+        
+        Humans.text = string.Format("시청자수: \n" + "{0}", GameManager.Instance.CurrentUser.humans);
+        humansTextMeshProUGUI.text = string.Format("{0}", GameManager.Instance.CurrentUser.humans);
+
     }
 
     public void Option()
@@ -160,4 +237,17 @@ public class UIManager : MonoBehaviour
     {
         option.transform.position = Vector2.down * 1000;
     }
+
+    public void Status()
+    {
+        StatusMemo.transform.position = Vector2.zero;
+        
+    }
+    
+    public void exitStatus()
+    {
+        StatusMemo.transform.position = Vector2.down * 1000;
+    }
+
+    
 }
