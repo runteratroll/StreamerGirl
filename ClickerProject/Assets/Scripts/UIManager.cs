@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject StatusMemo = null;
     [SerializeField]
-    TextMeshProUGUI SuccessText = null;
+    private GameObject EmailGameObj = null;
     [SerializeField]
     private TextMeshProUGUI Money = null;
     [SerializeField]
@@ -50,24 +50,27 @@ public class UIManager : MonoBehaviour
     private Image image = null;
     [SerializeField]
     private GameObject GmailContent = null;
-    [SerializeField]
-    private TextMeshProUGUI CsuccessText = null;
+    
     float spawnsTime;
     public float defaultTime = 0.05f;
-    private Ability ability;
+    public Ability ability;
     enum Panels {SkillShop, EquipMent};
-
+    bool Game = false;
+    bool Voice = false;
+    bool Humor = false;
     Animator animator = null;
     Panels panels = Panels.SkillShop;
     private List<UpgradePanel> upgradePanels = new List<UpgradePanel>();
     private List<UpgradeEquipment> upgradeEquipment = new List<UpgradeEquipment>();
     private List<Mail> upgradeMail = new List<Mail>();
-    GameObject newPanel = null;
-    Mail newMail = null;
-    public MailContent mailContent;
 
     [SerializeField]
-    Button button = null;
+    private Sprite idelEmail = null;
+    [SerializeField]
+    private Sprite AarmEmail = null;
+    [SerializeField]
+    private Image Email = null;
+
     private void Start()
     {
         
@@ -75,7 +78,8 @@ public class UIManager : MonoBehaviour
         
         
         animator = FindObjectOfType<Animator>();
-  
+        Debug.Log("STAST");
+        StartCoroutine(CreateEmail());
         CreatePanels();
         CreateEqupimentPanels();
         StartCoroutine(chatingInstance());
@@ -95,35 +99,10 @@ public class UIManager : MonoBehaviour
  
     private void Update()
     {
-
-        foreach (Email email in GameManager.Instance.CurrentUser.emailList)
-        {
-            CreateEmail(email);
-            if (email.NickName == "트키치 운영자" && EmailClick())
-            {
-                ClickButonContent(email);
+        
 
 
-            }
-            if (email.NickName == "팝캣" && EmailClick())
-            {
-                ClickButonContent(email);
-
-
-            }
-            if (email.NickName == "경기게임회사" && EmailClick())
-            {
-                ClickButonContent(email);
-
-
-            }
-
-            if (EmailPurchase())
-            {
-                OnClickPurchase(email);
-            }
-        }
-            if (Input.GetMouseButton(0) && spawnsTime >= defaultTime)
+        if (Input.GetMouseButton(0) && spawnsTime >= defaultTime)
         {
 
             spawnsTime = 0;
@@ -136,15 +115,20 @@ public class UIManager : MonoBehaviour
         {
             GameObject newPanel = null;
             UpgradePanel newPanelComponent = null;
+     
             foreach (Ability ability in GameManager.Instance.CurrentUser.soldierList)
             {
                 newPanel = Instantiate(upgradePanelTemplate, upgradePanelTemplate.transform.parent);
                 newPanelComponent = newPanel.GetComponent<UpgradePanel>();
+    
                 newPanelComponent.SetValue(ability);
                 newPanel.SetActive(true);
+     
                 Debug.Log("sdsadsadsadsadsa");
 
                 upgradePanels.Add(newPanelComponent);
+
+         
             }
         }
     }
@@ -163,68 +147,107 @@ public class UIManager : MonoBehaviour
             upgradeEquipment.Add(newPanelComponent);
         }
     }
-
-    private void CreateEmail(Email email)
+ 
+    private IEnumerator CreateEmail()
     {
-        //GameObject newPanel = null;
-        //Mail newMail = null;
-        
-        //foreach (Email email in GameManager.Instance.CurrentUser.emailList)
-        //{
-            
-            
+        GameObject newPanel;
+        Mail newMail = null;
+        int i = 0;
+        foreach (Email email in GameManager.Instance.CurrentUser.emailList)
+        {
+
+
             newPanel = Instantiate(EmailTemplate, EmailTemplate.transform.parent);
+
             newMail = newPanel.GetComponent<Mail>();
             newMail.SetValue(email);
+
+
             
-            newPanel.SetActive(true);  //생성되고 비활성화
+            yield return new WaitForSeconds(30f);
+            Email.sprite = AarmEmail;
             
-
-
-
+            newPanel.SetActive(true);
             upgradeMail.Add(newMail);
-
             
 
+            //    foreach (Ability ability in GameManager.Instance.CurrentUser.soldierList)
+            //    {
+
+            //        Debug.Log("ㄴㅇㄹㄴㅁㅇㄻㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ");
+            //        if (ability.abilityName == "목소리")
+            //        {
+            //            if (ability.amount >= 20)
+            //            {
+            //                if(email.NickName == "게임회사")
+            //                    newPanel.SetActive(true);
+            //            }
+            //        }
+            //        else if (ability.abilityName == "유머")
+            //        {
+            //            if (ability.amount >= 15)
+            //            {
+            //                if (email.NickName == "팝캣")
+            //                    newPanel.SetActive(true);
+            //            }
+            //        }
+            //        else if (ability.abilityName == "실력")
+            //        {
+            //            if (ability.amount >= 10)
+            //            {
+            //                if (email.NickName == "트키치운영자")
+            //                    newPanel.SetActive(true);
+            //            }
+            //        }
 
 
 
-        //}
-    }
-    public void OnClickPurchase(Email email)
-    {
+
+            //}
+
+
+
+        }
         
-        if (email.NickName == "경기게임회사 ")
-        {
-            CsuccessText.transform.position = new Vector2(0, 570);
-            GameManager.Instance.CurrentUser.energy += 30000;
-        }
-        if (email.NickName == "팝캣")
-        {
-            CsuccessText.transform.position = new Vector2(0, 570);
-            GameManager.Instance.CurrentUser.humans += 1000;
-        }
-        if (email.NickName == "트키치운영자")
-        {
-            CsuccessText.transform.position = new Vector2(0, 570);
-            GameManager.Instance.CurrentUser.Gamepercentage += 15;
-        }
-    }
+     
 
-    public void ClickButonContent(Email email) 
+
+
+
+    }
+    
+    public void emailClick()
     {
-        
-        GmailContent.transform.position = Vector2.zero;
-
-
-        if (email.NickName == "팝캣")
-            mailContent.UpdateUI(email);
-        if (email.NickName == "경기게임회사")
-            mailContent.UpdateUI(email);
-        if (email.NickName == "트키치 운영자")
-            mailContent.UpdateUI(email);
-
+        Email.sprite = idelEmail;
     }
+    //private void SerchBool(GameObject newPanel)
+    //{
+
+    //    if (ability.amount > 5 && ability.abilityName == "실력")
+    //    {
+    //        Game = true;
+    //        newPanel.SetActive(true);
+    //    }
+    //    else if (ability.amount > 15 && ability.abilityName == "목소리")
+    //    {
+    //        Voice = true;
+    //        newPanel.SetActive(true);
+    //    }
+    //    else if (ability.amount > 10 && ability.abilityName == "유머")
+    //    {
+    //        Humor = true;
+    //        newPanel.SetActive(true);
+    //    }
+
+    //    if (Game && Voice && Humor)
+    //        return;
+
+
+
+
+    //}
+
+
 
     private IEnumerator chatingInstance()
     {
@@ -260,11 +283,11 @@ public class UIManager : MonoBehaviour
         Donation newDonation = null;
         while (true)
         {
-            yield return new WaitForSeconds(GameManager.Instance.CurrentUser.donationSpeed); // 30
+            yield return new WaitForSeconds(GameManager.Instance.CurrentUser.donationSpeed); // 15
             bool Random = RandomChance.GetThisChanceResult(70); //70%확률
             if(!Random)
             {
-                yield return new WaitForSeconds(GameManager.Instance.CurrentUser.donationSpeed); //30
+                yield return new WaitForSeconds(GameManager.Instance.CurrentUser.donationSpeed); //15
             }
             if (poolDonation.childCount > 0)
             {
@@ -280,8 +303,8 @@ public class UIManager : MonoBehaviour
 
             newDonation.UpdateDonation();
             newDonation.Show();
-
-            yield return new WaitForSeconds(3f);
+            newDonation.SoundSS();
+            yield return new WaitForSeconds(4f);
             newDonation.Exit();
                 
         }
@@ -293,7 +316,7 @@ public class UIManager : MonoBehaviour
 
         GameManager.Instance.CurrentUser.energy += GameManager.Instance.CurrentUser.ePc;
         UpdateEnergyPanel();
-        animator.SetTrigger("ButtonClick");
+        animator.SetTrigger("Click");
         MoneyText newTextMeshProUGUI = null; //생성된 오브젝트는 복사기 때문에
         windowsClcik NewWindowsClcik = null;
         if (poolClick.childCount > 0) //풀에 자식이 있다면 즉  //가죠오기
@@ -363,7 +386,16 @@ public class UIManager : MonoBehaviour
         
     }
 
-
+    public void EmailShow()
+    {
+        
+            EmailGameObj.transform.position = new Vector2(-6, 0);
+        
+    }
+    public void exitEmail()
+    {
+        EmailGameObj.transform.position = Vector2.down * 1000;
+    }
 
     public void exitStatus()
     {

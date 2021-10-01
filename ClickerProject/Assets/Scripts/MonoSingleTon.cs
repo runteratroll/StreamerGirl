@@ -25,7 +25,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 if (instance == null)
                 {
-                    instance = FindObjectOfType<T>();
+                    instance = FindObjectOfType<T>(); //따라가기 돈디스트로이 오류해결해야함
                     if (instance == null)
                     {
 

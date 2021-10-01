@@ -7,7 +7,7 @@ public class User
     public long energy;
     public long ePc; //클릭당 에너지
     public long humans;
-    public int donationSpeed; //도네이션 얻는 속도 기본 30초
+    public float donationSpeed; //도네이션 얻는 속도 기본 30초
     public int donationRandom; //도네이션 확률
     public int chatingSpeed;
     public int Voicepercentage;

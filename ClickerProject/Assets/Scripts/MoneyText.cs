@@ -19,15 +19,15 @@ public class MoneyText : MonoBehaviour
 
         transform.SetParent(canvas.transform);
         transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
-        transform.position = new Vector3(transform.position.x, transform.position.y + 0.2f, 0f);
+        transform.position = new Vector3(transform.position.x, transform.position.y + 0.4f, 0f);
         gameObject.SetActive(true);
 
         RectTransform rectTransform = GetComponent<RectTransform>();
-        float targetPositionY = rectTransform.anchoredPosition.y + 50f;
+        float targetPositionY = rectTransform.anchoredPosition.y + 100f;
 
-        monyTextMeshProUGUI.DOFade(0f, 0.5f).OnComplete(() => Despawn()); //람다식
-        rectTransform.DOAnchorPosY(targetPositionY, 0.5f); //앵커포지션을 타겟포지션으로 바꿉니다.
-        
+        monyTextMeshProUGUI.DOFade(0f, 1f).OnComplete(() => Despawn()); //람다식
+         //앵커포지션을 타겟포지션으로 바꿉니다.
+        rectTransform.DOAnchorPosY(targetPositionY, 0.5f);
     }
 
     public void Despawn()

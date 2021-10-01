@@ -29,8 +29,9 @@ public class UpgradePanel : MonoBehaviour
     private TextMeshProUGUI humor = null;
     [SerializeField]
     private TextMeshProUGUI Game = null;
-    [SerializeField]
-    
+
+    ColorBlock cb;
+    Color newColor;
 
     private Image image = null;
 
@@ -44,6 +45,25 @@ public class UpgradePanel : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.CurrentUser.energy < ability.price)  //현재에너지
+        {
+            cb = purchaseButton.colors;
+            newColor = Color.gray;
+            cb.normalColor = newColor;
+            cb.highlightedColor = newColor;
+            purchaseButton.colors = cb;
+        }
+        else
+        {
+            cb = purchaseButton.colors;
+            newColor = Color.white;
+            cb.normalColor = newColor;
+            cb.highlightedColor = newColor;
+            purchaseButton.colors = cb;
+        }
+    }
     public void UpdateUI()
     {
 
@@ -59,37 +79,40 @@ public class UpgradePanel : MonoBehaviour
 
         if (GameManager.Instance.CurrentUser.energy < ability.price)  //현재에너지
         {
+            
             return;
         }
-
+        
         GameManager.Instance.CurrentUser.energy -= ability.price;
         ability.price = (long)(ability.price * 1.5f);
         ability.amount++;
         UpdateUI();
         GameManager.Instance.UI.UpdateEnergyPanel();
-
+        Voice.text = string.Format("목소리 Lv.{0}\n " + "목소리채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Voicepercentage);
+        humor.text = string.Format("유머 Lv.{0}\n" + "유머채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Humorpercentage);
+        Game.text = string.Format("실력 Lv.{0}\n" + "실력채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Gamepercentage);
         if (ability.abilityName == "목소리")
         {
-            GameManager.Instance.CurrentUser.Voicepercentage += 2;
-            Voice.text = string.Format("목소리 Lv.{0} " + "목소리채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Voicepercentage);
+            GameManager.Instance.CurrentUser.Voicepercentage += 3;
+            
             
             Debug.Log("목소리증가!!");
 
         }
         if (ability.abilityName == "유머")
         {
-            GameManager.Instance.CurrentUser.Humorpercentage += 2;
-            humor.text = string.Format("유머 Lv.{0}" + "유머채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Humorpercentage);
+            GameManager.Instance.CurrentUser.Humorpercentage += 3;
+           
         }
 
         if (ability.abilityName == "실력")
         {
-            GameManager.Instance.CurrentUser.Gamepercentage += 2;
-            Game.text = string.Format("실력 Lv.{0}" + "실력채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Gamepercentage);
+            GameManager.Instance.CurrentUser.Gamepercentage += 3;
+           
         }
         if (ability.abilityName == "도네이션" ) //도네이션 스프라이트라면
         {
-            if (ability.amount > 10) //도네이션 최대 객수 +3 
+            if (ability.amount >= 10) //도네이션 최대 객수 +3 
             {
                 return;
             }
@@ -100,11 +123,11 @@ public class UpgradePanel : MonoBehaviour
 
         if (ability.abilityName == "리액션")
         {
-            if (ability.amount > 20) //리액션 최대 객수 
+            if (ability.amount >= 10) //리액션 최대 객수 
             {
                 return;
             }
-            GameManager.Instance.CurrentUser.donationSpeed -= 2; //도네이션 30초에서 2초 단축 20번 최대
+            GameManager.Instance.CurrentUser.donationSpeed -= 0.5f; //도네이션 30초에서 2초 단축 20번 최대
         }
 
         

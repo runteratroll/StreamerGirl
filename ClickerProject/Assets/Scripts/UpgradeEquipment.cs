@@ -21,13 +21,31 @@ public class UpgradeEquipment : MonoBehaviour
     private TextMeshProUGUI equipmentExplain = null;
     private bool buyNow;
 
-    
-   
-    
-
+    ColorBlock cb;
+    Color newColor;
 
     private Equipment equipment = null;
+    private void Update()
+    {
+        if (GameManager.Instance.CurrentUser.energy < equipment.price)
+        {
+            cb = purchaseButton.colors;
+            newColor = Color.gray;
+            cb.normalColor = newColor;
+            cb.highlightedColor = newColor;
+            purchaseButton.colors = cb;
+        }
+        else
+        {
+            cb = purchaseButton.colors;
+            newColor = Color.white;
+            cb.normalColor = newColor;
+            cb.highlightedColor = newColor;
+            purchaseButton.colors = cb;
+        }
 
+    }
+           
 
 
     public void SetValue(Equipment equipment)
@@ -67,4 +85,6 @@ public class UpgradeEquipment : MonoBehaviour
         UpdateUI();
         GameManager.Instance.UI.UpdateEnergyPanel();
     }
+
+
 }
