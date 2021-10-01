@@ -37,8 +37,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
-        SaveToJson();
-        LoadFromJson();
+        //DontDestroyOnLoad(gameObject);
+        //SaveToJson();
+        //LoadFromJson();
         
 
 
@@ -68,11 +69,13 @@ public class GameManager : MonoSingleton<GameManager>
         uiManager = GetComponent<UIManager>();
         
     }
-
     
+
+
 
     private void EarnEnergyPerSecond()
     {
+        Debug.Log("EarnEnerw");
         //int i = 5;
         //int j = 1;
         foreach (Ability ability in user.soldierList)

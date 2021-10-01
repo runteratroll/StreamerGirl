@@ -40,14 +40,18 @@ public class Start : MonoBehaviour
         {
             Directory.CreateDirectory(SAVE_PATH);
         }
-     
+
+
 
         if (File.Exists(SAVE_PATH + SAVE_FILENAME))
         {
 
             System.IO.File.Delete(SAVE_PATH + SAVE_FILENAME);
             File.Create(SAVE_PATH + SAVE_FILENAME);
+
+
         }
+
 
 
 
