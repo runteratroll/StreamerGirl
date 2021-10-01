@@ -164,7 +164,7 @@ public class UIManager : MonoBehaviour
 
 
             
-            yield return new WaitForSeconds(30f);
+            yield return new WaitForSeconds(20f);
             Email.sprite = AarmEmail;
             
             newPanel.SetActive(true);

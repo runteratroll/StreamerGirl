@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: ed53352bdb7e1c043865adc98c6b9b7b, type: 3}
+    totalSpriteSurfaceArea: 50473039
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 26c016008ba83aa4798e472236e78eb5, type: 3}
+  - {fileID: 21300000, guid: 544a4b700c62b434284fdf7c73d901ba, type: 3}
+  - {fileID: 21300000, guid: b4b0a20129607b845af635691bd625bb, type: 3}
+  - {fileID: 21300000, guid: 58b6135123a22204387ca8e94f7b3ae9, type: 3}
+  - {fileID: 21300000, guid: 62e4b212f8509764fac6c6b3dc2d6cc1, type: 3}
+  - {fileID: 21300000, guid: f35bd8e208281e8458cbe4aeb21b48bf, type: 3}
+  - {fileID: 21300000, guid: 9d119d53918d87c4b9d793f5be55b1b1, type: 3}
+  - {fileID: 21300000, guid: 50705a833681c58438481eaa93f7e183, type: 3}
+  - {fileID: 21300000, guid: e606339365b950245813894f26318c94, type: 3}
+  - {fileID: 21300000, guid: 478c993495b609c4da9417d9c2b3992b, type: 3}
+  - {fileID: 21300000, guid: e11e6c849a4cfa4428a09b3ce9c7c8cd, type: 3}
+  - {fileID: 21300000, guid: 2a9380d4c251633468e0da42263bc70b, type: 3}
+  - {fileID: 21300000, guid: 6d9007e47b7cc8a439b2420685374b59, type: 3}
+  - {fileID: 21300000, guid: 3cddb25546e55ba4c8e0457a501c58d8, type: 3}
+  - {fileID: 4028879726386500619, guid: d902b7c5fdacc6f46be61dd79e18fe30, type: 3}
+  - {fileID: -8345172770787448145, guid: d902b7c5fdacc6f46be61dd79e18fe30, type: 3}
+  - {fileID: 21300000, guid: 6cbb43e5bf05ceb4c97651cd580f0d4d, type: 3}
+  - {fileID: 21300000, guid: 2eeda3f58c8f5bd46a1d9e424767ce50, type: 3}
+  - {fileID: 21300000, guid: bfbedef55ed425549a2d9a3ef8ce385e, type: 3}
+  - {fileID: 21300000, guid: e2ded6b617385f6408885a8a3e6c011b, type: 3}
+  - {fileID: -1200085794581080390, guid: a18a81e6979c0254e828777c9126d986, type: 3}
+  - {fileID: 21300000, guid: ed116ce6411145e408b82450696deb3b, type: 3}
+  - {fileID: 21300000, guid: 847669173739d914482bedd7da67a8b3, type: 3}
+  - {fileID: 21300000, guid: 4394b937b3218df4b84a2d06d3c26642, type: 3}
+  - {fileID: 21300000, guid: c16a2ea8a5af6654f9d2a2e0db219153, type: 3}
+  - {fileID: 21300000, guid: 29b385b8d6d16a845926ce51b539159a, type: 3}
+  - {fileID: 21300000, guid: 84a38fe83b3dcb74f82a9b000cdf53d0, type: 3}
+  - {fileID: -7897826582631791948, guid: e8c5c459ec73be34089a95a56ccd0c89, type: 3}
+  - {fileID: 3012758080872590764, guid: e8c5c459ec73be34089a95a56ccd0c89, type: 3}
+  - {fileID: 21300000, guid: 31b33aa9c94866f4a9e8e3b21e4c7619, type: 3}
+  - {fileID: 21300000, guid: dae16a0a1e068f84895dbdac140afcbd, type: 3}
+  - {fileID: 21300000, guid: 47b1f60b293800b46ab8f27f9a6c392e, type: 3}
+  - {fileID: 21300000, guid: ae5dbe6b35086b548bba12882c311a71, type: 3}
+  - {fileID: -723415951869367042, guid: 49ee2f9b649cc854cb2011075ce4e9d3, type: 3}
+  - {fileID: -8819204307325172043, guid: 49ee2f9b649cc854cb2011075ce4e9d3, type: 3}
+  - {fileID: -3637557228772214577, guid: 49ee2f9b649cc854cb2011075ce4e9d3, type: 3}
+  - {fileID: -2337961310298916287, guid: 49ee2f9b649cc854cb2011075ce4e9d3, type: 3}
+  - {fileID: 21300000, guid: f326d3eb30e4f3c468341d609f013459, type: 3}
+  - {fileID: 21300000, guid: 5491372ca91f2f2438eb7eef909e63ad, type: 3}
+  - {fileID: 6053055314021944356, guid: 072a5a3ccb936864d934133b1b06c29f, type: 3}
+  - {fileID: 8127846802658719108, guid: 072a5a3ccb936864d934133b1b06c29f, type: 3}
+  - {fileID: 21300000, guid: 662566bcc3c3d4845b044d2e591660f9, type: 3}
+  - {fileID: 21300000, guid: 27ed8acc9173b30419672fa7dfdca6a9, type: 3}
+  - {fileID: 21300000, guid: cf38a6dd2a730e5499f0f45e5759a8df, type: 3}
+  - {fileID: 21300000, guid: d757275ea5d173248bdc958c8edd6166, type: 3}
+  - {fileID: 8813388069999582564, guid: 45d0556e6931ba74aa7f3aa5cea83f98, type: 3}
+  - {fileID: -2299854438439939197, guid: 45d0556e6931ba74aa7f3aa5cea83f98, type: 3}
+  - {fileID: 6719169754601135636, guid: 45d0556e6931ba74aa7f3aa5cea83f98, type: 3}
+  - {fileID: -5643105228771564274, guid: 45d0556e6931ba74aa7f3aa5cea83f98, type: 3}
+  - {fileID: 21300000, guid: c068c37ec4400ba4685da05c83f79689, type: 3}
+  - {fileID: 21300000, guid: 33662e8e675c8f84eacd9c6f341fbb18, type: 3}
+  - {fileID: 21300000, guid: 923c5b9e4ce79fd4f872848610f6a25e, type: 3}
+  - {fileID: 21300000, guid: 2105d1ee0b598e1428082f7b984cbbd0, type: 3}
+  - {fileID: 21300000, guid: 50e2843fd13943c47b3592440e398ca2, type: 3}
+  - {fileID: 21300000, guid: e8a18b8f7e9fbb948a5863fa26305b31, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - pngwing.com (8)
+  - ssssl
+  - pngwing.com (1)
+  - human 1
+  - pngwing.com (8) 1
+  - Untitled-2
+  - pngwing.com (16)
+  - human
+  - "\uD654\uBA74 \uCEA1\uCC98 2021-10-01 200023"
+  - UI newPanel
+  - pngwing.com (2)
+  - pngwing.com (17)
+  - pngwing.com (9)
+  - UI Panel
+  - img_1
+  - img_0
+  - Vakc
+  - pngwing.com (3)
+  - image0
+  - pngwing.com (11)
+  - PopCat_0
+  - KakaoTalk_20210926_202324741
+  - Fox
+  - pngwing.com (14)
+  - Start 2
+  - img
+  - pngwing.com (10)
+  - Scifi_UI_Frame_1
+  - Scifi_UI_Frame_0
+  - pngwing.com (6)
+  - pngwing.com (15)
+  - pngwing.com (4)
+  - pngwing.com (8) 2
+  - Soldiers_3
+  - Soldiers_2
+  - Soldiers_1
+  - Soldiers_0
+  - Sprite-0002
+  - Start
+  - PopCat 1_0
+  - PopCat 1_1
+  - Start 1
+  - pngwing.com (7)
+  - Fox2
+  - Vakc-export
+  - Sprite-0003_3
+  - Sprite-0003_2
+  - Sprite-0003_1
+  - Sprite-0003_0
+  - pngwing.com (8) 3
+  - Fox3
+  - pngwing.com (12)
+  - Health
+  - pngwing.com (13)
+  - UI selectedPanel
+  m_RenderDataMap: {}
+  m_Tag: New Sprite Atlas
+  m_IsVariant: 0

@@ -16,7 +16,7 @@ public class UpgradePanel : MonoBehaviour
     [SerializeField]
     private Image soldierImage = null;
     [SerializeField]
-    private Sprite[] soldierSprite;
+    private Sprite[] soldierSprite = null;
     [SerializeField]
     private TextMeshProUGUI abilityExplain = null;
     [SerializeField]
@@ -86,16 +86,16 @@ public class UpgradePanel : MonoBehaviour
         GameManager.Instance.CurrentUser.energy -= ability.price;
         ability.price = (long)(ability.price * 1.5f);
         ability.amount++;
-        UpdateUI();
-        GameManager.Instance.UI.UpdateEnergyPanel();
+
+
+
+        
         Voice.text = string.Format("목소리 Lv.{0}\n " + "목소리채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Voicepercentage);
         humor.text = string.Format("유머 Lv.{0}\n" + "유머채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Humorpercentage);
         Game.text = string.Format("실력 Lv.{0}\n" + "실력채팅확률 {1}%", ability.amount, GameManager.Instance.CurrentUser.Gamepercentage);
         if (ability.abilityName == "목소리")
         {
             GameManager.Instance.CurrentUser.Voicepercentage += 3;
-            
-            
             Debug.Log("목소리증가!!");
 
         }
@@ -112,10 +112,10 @@ public class UpgradePanel : MonoBehaviour
         }
         if (ability.abilityName == "도네이션" ) //도네이션 스프라이트라면
         {
-            if (ability.amount >= 10) //도네이션 최대 객수 +3 
-            {
-                return;
-            }
+            //if (ability.amount >= 10) //도네이션 최대 객수 +3 
+            //{
+            //    return;
+            //}
             GameManager.Instance.CurrentUser.donationRandom += 3; //확률 3퍼 증가 10번 최대
             
         }
@@ -123,10 +123,10 @@ public class UpgradePanel : MonoBehaviour
 
         if (ability.abilityName == "리액션")
         {
-            if (ability.amount >= 10) //리액션 최대 객수 
-            {
-                return;
-            }
+            //if (ability.amount >= 10) //리액션 최대 객수 
+            //{
+            //    return;
+            //}
             GameManager.Instance.CurrentUser.donationSpeed -= 0.5f; //도네이션 30초에서 2초 단축 20번 최대
         }
 
@@ -138,6 +138,9 @@ public class UpgradePanel : MonoBehaviour
 
 
         GameManager.Instance.CurrentUser.ePc += ability.amount * 2; //여기서 문제 다른걸 어마운트 한다면?
-        
+
+        UpdateUI();
+        GameManager.Instance.UI.UpdateEnergyPanel();
+
     }
 }
