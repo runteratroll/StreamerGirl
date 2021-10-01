@@ -6,7 +6,7 @@ public class OneStudio : MonoBehaviour
 {
     private void Awake()
     {
-        Invoke("SceneNext", 2f);
+        Invoke("SceneNext", 1.5f);
 
     }
 

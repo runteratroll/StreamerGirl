@@ -17,6 +17,7 @@ public class GameManager : MonoSingleton<GameManager>
     private string BASIC_FILENAME = "/BasicFile.txt";
     private string basic = "";
     private bool basics= false;
+    private bool sssss = false;
     [SerializeField]
     private User user = null;
 
@@ -36,8 +37,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
-       
-
+        SaveToJson();
+        LoadFromJson();
+        
 
 
         //persistentDataPath
@@ -56,6 +58,9 @@ public class GameManager : MonoSingleton<GameManager>
 
             File.WriteAllText(SAVE_PATH + BASIC_FILENAME, basic, System.Text.Encoding.UTF8); //¾¸
         }
+
+        
+
         InvokeRepeating("SaveToJson", 1f, 60f);
         InvokeRepeating("EarnEnergyPerSecond", 0f, 1f);
         LoadFromJson();

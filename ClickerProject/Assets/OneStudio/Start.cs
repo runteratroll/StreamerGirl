@@ -12,16 +12,11 @@ public class Start : MonoBehaviour
     private GameObject StartNewAndLoad = null;
     private string SAVE_PATH = "";
     private string SAVE_FILENAME = "/SaveFile.txt";
+
     private void Awake()
     {
         //DontDestroyOnLoad(option);
-        SAVE_PATH = Application.persistentDataPath + "/Save"; //파일
-        Debug.Log(Application.persistentDataPath);
-
-        if (Directory.Exists(SAVE_PATH) == false) //세이브파일이 존재하지 않는 다면
-        {
-            Directory.CreateDirectory(SAVE_PATH);
-        }
+       
 
 
 
@@ -38,10 +33,24 @@ public class Start : MonoBehaviour
 
     public void StartNew()
     {
+        SAVE_PATH = Application.persistentDataPath + "/Save"; //파일
+        Debug.Log(Application.persistentDataPath);
+
+        if (Directory.Exists(SAVE_PATH) == false) //세이브파일이 존재하지 않는 다면
+        {
+            Directory.CreateDirectory(SAVE_PATH);
+        }
+     
+
+        if (File.Exists(SAVE_PATH + SAVE_FILENAME))
+        {
+
+            System.IO.File.Delete(SAVE_PATH + SAVE_FILENAME);
+            File.Create(SAVE_PATH + SAVE_FILENAME);
+        }
 
 
 
-        GameManager.Instance.ResetJson();
 
         SceneManager.LoadScene("SampleScene"); //그리고 씬을 넘어간다 돈디스트로이 오브젝트
 
